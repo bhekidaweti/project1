@@ -1,0 +1,421 @@
+[
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "AppConfig",
+        "importPath": "django.apps",
+        "description": "django.apps",
+        "isExtraImport": true,
+        "detail": "django.apps",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "TestCase",
+        "importPath": "django.test",
+        "description": "django.test",
+        "isExtraImport": true,
+        "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "include",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "ContentFile",
+        "importPath": "django.core.files.base",
+        "description": "django.core.files.base",
+        "isExtraImport": true,
+        "detail": "django.core.files.base",
+        "documentation": {}
+    },
+    {
+        "label": "default_storage",
+        "importPath": "django.core.files.storage",
+        "description": "django.core.files.storage",
+        "isExtraImport": true,
+        "detail": "django.core.files.storage",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "markdown",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "markdown",
+        "description": "markdown",
+        "detail": "markdown",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "get_asgi_application",
+        "importPath": "django.core.asgi",
+        "description": "django.core.asgi",
+        "isExtraImport": true,
+        "detail": "django.core.asgi",
+        "documentation": {}
+    },
+    {
+        "label": "get_wsgi_application",
+        "importPath": "django.core.wsgi",
+        "description": "django.core.wsgi",
+        "isExtraImport": true,
+        "detail": "django.core.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "EncyclopediaConfig",
+        "kind": 6,
+        "importPath": "encyclopedia.apps",
+        "description": "encyclopedia.apps",
+        "peekOfCode": "class EncyclopediaConfig(AppConfig):\n    name = 'encyclopedia'",
+        "detail": "encyclopedia.apps",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "encyclopedia.urls",
+        "description": "encyclopedia.urls",
+        "peekOfCode": "urlpatterns = [\n    path(\"\", views.index, name=\"index\"),\n    path(\"wiki/<str:title>\", views.entry, name=\"entry\"),\n    path(\"search/\", views.search, name=\"search\"),\n    path(\"new/\", views.new_page, name=\"new_page\"),     \n]",
+        "detail": "encyclopedia.urls",
+        "documentation": {}
+    },
+    {
+        "label": "list_entries",
+        "kind": 2,
+        "importPath": "encyclopedia.util",
+        "description": "encyclopedia.util",
+        "peekOfCode": "def list_entries():\n    \"\"\"\n    Returns a list of all names of encyclopedia entries.\n    \"\"\"\n    _, filenames = default_storage.listdir(\"entries\")\n    return list(sorted(re.sub(r\"\\.md$\", \"\", filename)\n                for filename in filenames if filename.endswith(\".md\")))\ndef save_entry(title, content):\n    \"\"\"\n    Saves an encyclopedia entry, given its title and Markdown",
+        "detail": "encyclopedia.util",
+        "documentation": {}
+    },
+    {
+        "label": "save_entry",
+        "kind": 2,
+        "importPath": "encyclopedia.util",
+        "description": "encyclopedia.util",
+        "peekOfCode": "def save_entry(title, content):\n    \"\"\"\n    Saves an encyclopedia entry, given its title and Markdown\n    content. If an existing entry with the same title already exists,\n    it is replaced.\n    \"\"\"\n    filename = f\"entries/{title}.md\"\n    if default_storage.exists(filename):\n        default_storage.delete(filename)\n    default_storage.save(filename, ContentFile(content))",
+        "detail": "encyclopedia.util",
+        "documentation": {}
+    },
+    {
+        "label": "get_entry",
+        "kind": 2,
+        "importPath": "encyclopedia.util",
+        "description": "encyclopedia.util",
+        "peekOfCode": "def get_entry(title):\n    \"\"\"\n    Retrieves an encyclopedia entry by its title. If no such\n    entry exists, the function returns None.\n    \"\"\"\n    try:\n        f = default_storage.open(f\"entries/{title}.md\")\n        return f.read().decode(\"utf-8\")\n    except FileNotFoundError:\n        return None",
+        "detail": "encyclopedia.util",
+        "documentation": {}
+    },
+    {
+        "label": "convert_md_to_html",
+        "kind": 2,
+        "importPath": "encyclopedia.views",
+        "description": "encyclopedia.views",
+        "peekOfCode": "def convert_md_to_html(title):\n    content = util.get_entry(title)\n    markdowner = markdown.Markdown()\n    if content == None:\n        return None \n    else:\n        return markdowner.convert(content)\ndef index(request):\n    return render(request, \"encyclopedia/index.html\", {\n        \"entries\": util.list_entries()",
+        "detail": "encyclopedia.views",
+        "documentation": {}
+    },
+    {
+        "label": "index",
+        "kind": 2,
+        "importPath": "encyclopedia.views",
+        "description": "encyclopedia.views",
+        "peekOfCode": "def index(request):\n    return render(request, \"encyclopedia/index.html\", {\n        \"entries\": util.list_entries()\n    })\ndef entry(request, title):\n    html_content = convert_md_to_html(title)\n    if html_content == None:\n        return render(request, \"encyclopedia/error.html\", {\n            \"message:\" \"This entry doesn't exist!!\"\n        })",
+        "detail": "encyclopedia.views",
+        "documentation": {}
+    },
+    {
+        "label": "entry",
+        "kind": 2,
+        "importPath": "encyclopedia.views",
+        "description": "encyclopedia.views",
+        "peekOfCode": "def entry(request, title):\n    html_content = convert_md_to_html(title)\n    if html_content == None:\n        return render(request, \"encyclopedia/error.html\", {\n            \"message:\" \"This entry doesn't exist!!\"\n        })\n    else:\n        return render(request, \"encyclopedia/entry.html\", {\n            \"title\": title,   \n            \"content\": html_content",
+        "detail": "encyclopedia.views",
+        "documentation": {}
+    },
+    {
+        "label": "search",
+        "kind": 2,
+        "importPath": "encyclopedia.views",
+        "description": "encyclopedia.views",
+        "peekOfCode": "def search(request):\n    if request.method == \"POST\":\n        entry_search = request.POST['q']\n        html_content = convert_md_to_html(entry_search)\n        if html_content is not None:\n            return render(request, \"encyclopedia/entry.html\", {\n                \"title\": entry_search,\n                \"content\": html_content\n            })\n        else:",
+        "detail": "encyclopedia.views",
+        "documentation": {}
+    },
+    {
+        "label": "new_page",
+        "kind": 2,
+        "importPath": "encyclopedia.views",
+        "description": "encyclopedia.views",
+        "peekOfCode": "def new_page(request):\n    if request.method == \"GET\":\n        return render(request, \"encyclopedia/new.html\")\n    else:\n        title = request.POST['title']\n        content = request.POST['content']\n        titleExist = util.get_entry(title)\n        if titleExist is not None:\n            return render(request, \"encyclopedia/error.html\", {\n                \"message\": \"Entry page already exist\"",
+        "detail": "encyclopedia.views",
+        "documentation": {}
+    },
+    {
+        "label": "application",
+        "kind": 5,
+        "importPath": "wiki.asgi",
+        "description": "wiki.asgi",
+        "peekOfCode": "application = get_asgi_application()",
+        "detail": "wiki.asgi",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_DIR",
+        "kind": 5,
+        "importPath": "wiki.settings",
+        "description": "wiki.settings",
+        "peekOfCode": "BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = '%710m*zic)#0u((qugw#1@e^ty!c)9j04956v@ly(_86n$rg)h'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [",
+        "detail": "wiki.settings",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "wiki.settings",
+        "description": "wiki.settings",
+        "peekOfCode": "SECRET_KEY = '%710m*zic)#0u((qugw#1@e^ty!c)9j04956v@ly(_86n$rg)h'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'encyclopedia',\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',",
+        "detail": "wiki.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "wiki.settings",
+        "description": "wiki.settings",
+        "peekOfCode": "DEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'encyclopedia',\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',",
+        "detail": "wiki.settings",
+        "documentation": {}
+    },
+    {
+        "label": "ALLOWED_HOSTS",
+        "kind": 5,
+        "importPath": "wiki.settings",
+        "description": "wiki.settings",
+        "peekOfCode": "ALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'encyclopedia',\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',",
+        "detail": "wiki.settings",
+        "documentation": {}
+    },
+    {
+        "label": "INSTALLED_APPS",
+        "kind": 5,
+        "importPath": "wiki.settings",
+        "description": "wiki.settings",
+        "peekOfCode": "INSTALLED_APPS = [\n    'encyclopedia',\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n]\nMIDDLEWARE = [",
+        "detail": "wiki.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MIDDLEWARE",
+        "kind": 5,
+        "importPath": "wiki.settings",
+        "description": "wiki.settings",
+        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n]\nROOT_URLCONF = 'wiki.urls'",
+        "detail": "wiki.settings",
+        "documentation": {}
+    },
+    {
+        "label": "ROOT_URLCONF",
+        "kind": 5,
+        "importPath": "wiki.settings",
+        "description": "wiki.settings",
+        "peekOfCode": "ROOT_URLCONF = 'wiki.urls'\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',\n                'django.template.context_processors.request',",
+        "detail": "wiki.settings",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATES",
+        "kind": 5,
+        "importPath": "wiki.settings",
+        "description": "wiki.settings",
+        "peekOfCode": "TEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',\n                'django.template.context_processors.request',\n                'django.contrib.auth.context_processors.auth',",
+        "detail": "wiki.settings",
+        "documentation": {}
+    },
+    {
+        "label": "WSGI_APPLICATION",
+        "kind": 5,
+        "importPath": "wiki.settings",
+        "description": "wiki.settings",
+        "peekOfCode": "WSGI_APPLICATION = 'wiki.wsgi.application'\n# Database\n# https://docs.djangoproject.com/en/3.0/ref/settings/#databases\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),\n    }\n}\n# Password validation",
+        "detail": "wiki.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASES",
+        "kind": 5,
+        "importPath": "wiki.settings",
+        "description": "wiki.settings",
+        "peekOfCode": "DATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),\n    }\n}\n# Password validation\n# https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators\nAUTH_PASSWORD_VALIDATORS = [\n    {",
+        "detail": "wiki.settings",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_PASSWORD_VALIDATORS",
+        "kind": 5,
+        "importPath": "wiki.settings",
+        "description": "wiki.settings",
+        "peekOfCode": "AUTH_PASSWORD_VALIDATORS = [\n    {\n        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',\n    },",
+        "detail": "wiki.settings",
+        "documentation": {}
+    },
+    {
+        "label": "LANGUAGE_CODE",
+        "kind": 5,
+        "importPath": "wiki.settings",
+        "description": "wiki.settings",
+        "peekOfCode": "LANGUAGE_CODE = 'en-us'\nTIME_ZONE = 'UTC'\nUSE_I18N = True\nUSE_L10N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/3.0/howto/static-files/\nSTATIC_URL = '/static/'",
+        "detail": "wiki.settings",
+        "documentation": {}
+    },
+    {
+        "label": "TIME_ZONE",
+        "kind": 5,
+        "importPath": "wiki.settings",
+        "description": "wiki.settings",
+        "peekOfCode": "TIME_ZONE = 'UTC'\nUSE_I18N = True\nUSE_L10N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/3.0/howto/static-files/\nSTATIC_URL = '/static/'",
+        "detail": "wiki.settings",
+        "documentation": {}
+    },
+    {
+        "label": "USE_I18N",
+        "kind": 5,
+        "importPath": "wiki.settings",
+        "description": "wiki.settings",
+        "peekOfCode": "USE_I18N = True\nUSE_L10N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/3.0/howto/static-files/\nSTATIC_URL = '/static/'",
+        "detail": "wiki.settings",
+        "documentation": {}
+    },
+    {
+        "label": "USE_L10N",
+        "kind": 5,
+        "importPath": "wiki.settings",
+        "description": "wiki.settings",
+        "peekOfCode": "USE_L10N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/3.0/howto/static-files/\nSTATIC_URL = '/static/'",
+        "detail": "wiki.settings",
+        "documentation": {}
+    },
+    {
+        "label": "USE_TZ",
+        "kind": 5,
+        "importPath": "wiki.settings",
+        "description": "wiki.settings",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/3.0/howto/static-files/\nSTATIC_URL = '/static/'",
+        "detail": "wiki.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_URL",
+        "kind": 5,
+        "importPath": "wiki.settings",
+        "description": "wiki.settings",
+        "peekOfCode": "STATIC_URL = '/static/'",
+        "detail": "wiki.settings",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "wiki.urls",
+        "description": "wiki.urls",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('', include(\"encyclopedia.urls\"))\n]",
+        "detail": "wiki.urls",
+        "documentation": {}
+    },
+    {
+        "label": "application",
+        "kind": 5,
+        "importPath": "wiki.wsgi",
+        "description": "wiki.wsgi",
+        "peekOfCode": "application = get_wsgi_application()",
+        "detail": "wiki.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "def main():\n    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'wiki.settings')\n    try:\n        from django.core.management import execute_from_command_line\n    except ImportError as exc:\n        raise ImportError(\n            \"Couldn't import Django. Are you sure it's installed and \"\n            \"available on your PYTHONPATH environment variable? Did you \"\n            \"forget to activate a virtual environment?\"\n        ) from exc",
+        "detail": "manage",
+        "documentation": {}
+    }
+]
